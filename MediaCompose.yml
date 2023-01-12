@@ -1,0 +1,29 @@
+---
+version: "2.1"
+services:
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=${USR_PUID}
+      - PGID=${USR_PGID}
+      - TZ=${TIME_ZONE}
+    volumes:
+      - /path/to/data:/config
+      - /path/to/movies:/movies
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=${USR_PUID}
+      - PGID=${USR_PGID}
+      - TZ=${TIME_ZONE}
+    volumes:
+      - /path/to/data:/config
+      - /path/to/tvseries:/tv
+    ports:
+      - 8989:8989
+    restart: unless-stopped
